@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const HeroCarousel = ({ posts }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -82,13 +83,12 @@ const HeroCarousel = ({ posts }) => {
         </motion.h1>
 
         {/* Call to Action */}
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="px-8 py-3 bg-white text-black font-semibold rounded-full hover:bg-indigo-50 transition-colors"
+        <Link
+          to="/events"
+          className="px-8 py-3 bg-white text-black font-semibold rounded-full hover:bg-indigo-50 transition-colors inline-block"
         >
-          Explore Event
-        </motion.button>
+          Explore Events
+        </Link>
 
       </div>
 

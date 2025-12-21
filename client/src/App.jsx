@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import ClubsDirectory from './pages/ClubsDirectory';
 import ClubProfile from './pages/ClubProfile';
+import Events from './pages/Events';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/clubs" element={<ClubsDirectory />} />
           <Route path="/clubs/:id" element={<ClubProfile />} />
+          <Route path="/events" element={<Events />} />
         </Routes>
       </div>
     </Router>

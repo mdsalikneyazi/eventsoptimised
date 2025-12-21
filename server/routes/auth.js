@@ -292,5 +292,46 @@ router.put('/update-banner', auth, upload.single('file'), async (req, res) => {
   }
 });
 
+// @route   GET /api/auth
+// @desc    Get logged in user details
+router.get('/', auth, async (req, res) => {
+  try {
+    const admin = await Admin.findById(req.user.id).select('-password');
+    if (!admin) return res.status(404).json({ msg: 'User not found' });
+
+    // If super admin, return admin info
+    if (admin.role === 'super_admin') {
+       return res.json({ 
+         id: admin._id,
+         name: 'Super Admin', 
+         role: admin.role,
+         email: admin.email 
+       });
+    }
+
+    // If club admin, return club info merged with admin info
+    if (admin.clubId) {
+       const club = await Club.findById(admin.clubId);
+       if (club) {
+         return res.json({
+           id: admin._id,
+           name: club.name,
+           email: admin.email,
+           role: admin.role,
+           logoUrl: club.logoUrl,
+           clubId: club._id
+         });
+       }
+    }
+    
+    // Fallback if club not found
+    res.json(admin);
+
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;
 

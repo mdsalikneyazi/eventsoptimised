@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import HeroCarousel from '../components/HeroCarousel';
 import PostCard from '../components/PostCard';
 
@@ -40,9 +41,18 @@ const Home = () => {
           
           {/* Filter Buttons (Visual only for now) */}
           <div className="hidden md:flex gap-2">
-            <button className="px-4 py-2 bg-white text-black text-sm font-bold rounded-full">All</button>
-            <button className="px-4 py-2 bg-zinc-900 text-zinc-400 text-sm font-bold rounded-full border border-zinc-800 hover:border-zinc-600">Events</button>
-            <button className="px-4 py-2 bg-zinc-900 text-zinc-400 text-sm font-bold rounded-full border border-zinc-800 hover:border-zinc-600">News</button>
+            <button className="px-6 py-2 bg-white text-black font-bold rounded-full transition-transform hover:scale-105">
+              All
+            </button>
+            <Link 
+              to="/events" 
+              className="px-6 py-2 bg-zinc-900 border border-zinc-800 text-zinc-400 font-bold rounded-full hover:bg-zinc-800 hover:text-white transition-all hover:scale-105"
+            >
+              Events
+            </Link>
+            <button className="px-6 py-2 bg-zinc-900 border border-zinc-800 text-zinc-400 font-bold rounded-full hover:bg-zinc-800 hover:text-white transition-all hover:scale-105">
+              News
+            </button>
           </div>
         </div>
 
