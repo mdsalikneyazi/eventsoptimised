@@ -2,16 +2,12 @@ const express = require('express');
 const router = express.Router();
 const Application = require('../models/Application');
 const { auth } = require('../middleware/auth');
-const axios = require('axios');
-
-// Add your RECAPTCHA_SECRET_KEY here if you have it, otherwise validation might fail
-const SECRET_KEY = "YOUR_SECRET_KEY"; 
+const axios = require('axios'); // Ensure axios is installed: npm install axios
 
 // @route   GET /api/applications/my-applications
 // @desc    Get all applications for the logged-in club
 router.get('/my-applications', auth, async (req, res) => {
   try {
-    // Find applications where clubId matches the logged-in user's ID
     const apps = await Application.find({ clubId: req.user.id }).sort({ createdAt: -1 });
     res.json(apps);
   } catch (err) {
@@ -25,9 +21,24 @@ router.get('/my-applications', auth, async (req, res) => {
 router.post('/apply', async (req, res) => {
   const { clubId, studentName, studentEmail, rollNumber, reason, captchaToken } = req.body;
 
+  // 1. CAPTCHA VERIFICATION
+  if (!captchaToken) {
+    return res.status(400).json({ msg: 'Please complete the CAPTCHA.' });
+  }
+
   try {
-    // Optional: Add CAPTCHA verification here if enabled
+    // Verify with Google
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY; // Save this in your .env file
+    const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaToken}`;
+
+    const response = await axios.post(verifyUrl);
     
+    // If Google says it's a bot (success: false)
+    if (!response.data.success) {
+      return res.status(400).json({ msg: 'CAPTCHA verification failed. Are you a robot?' });
+    }
+
+    // 2. If valid, save the application
     const newApp = new Application({
       clubId,
       studentName,
@@ -38,8 +49,9 @@ router.post('/apply', async (req, res) => {
 
     await newApp.save();
     res.json({ msg: 'Application submitted successfully!' });
+
   } catch (err) {
-    console.error(err.message);
+    console.error("Application Error:", err.message);
     res.status(500).send('Server Error');
   }
 });
