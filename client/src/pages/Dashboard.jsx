@@ -6,6 +6,7 @@ import CreateClubForm from '../components/CreateClubForm'; // Ensure you have th
 import ClubSettingsForm from '../components/ClubSettingsForm';
 import ApplicationsList from '../components/ApplicationsList';
 import EventsManager from '../components/EventsManager'; // <--- NEW IMPORT
+import ModerationFeed from '../components/ModerationFeed';
 import LogoUploader from '../components/LogoUploader';
 import { FaTrash, FaEye } from 'react-icons/fa';
 
@@ -68,7 +69,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 pt-24 px-4 pb-20">
+    <div className="min-h-screen bg-zinc-950 pt-14 md:pt-24 px-4 pb-24 md:pb-20">
       <div className="max-w-6xl mx-auto">
         
         {/* Header Section */}
@@ -180,6 +181,16 @@ const Dashboard = () => {
           </div>
 
         </div>
+
+        {/* 👇 SUPER ADMIN SECTION 👇 */}
+        {role === 'super_admin' && (
+          <div className="mt-12 pt-8 border-t border-zinc-800">
+            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+              ⚠️ Super Admin Zone
+            </h2>
+            <ModerationFeed />
+          </div>
+        )}
 
       </div>
     </div>

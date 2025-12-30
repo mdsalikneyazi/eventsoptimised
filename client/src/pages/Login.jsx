@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { FaUniversity } from 'react-icons/fa';
+import { FaUniversity, FaArrowRight } from 'react-icons/fa';
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -21,87 +21,79 @@ const Login = () => {
 
     try {
       const res = await axios.post('http://localhost:5000/api/auth/login', formData);
-      
-      console.log('Login Response:', res.data); // Debugging
-
-      // 1. Save Token
       localStorage.setItem('token', res.data.token);
-      
-      if (res.data.role) {
-        localStorage.setItem('userRole', res.data.role);
-      }
+      if (res.data.role) localStorage.setItem('userRole', res.data.role);
 
-      // 2. CHECK THE FLAG: Do they need to change password?
       if (res.data.mustChangePassword) {
         navigate('/change-password');
       } else {
         navigate('/dashboard');
       }
-      
     } catch (err) {
-      console.error('Login Error:', err);
-      setError(err.response?.data?.msg || 'Login failed. Please check your connection.');
+      setError(err.response?.data?.msg || 'Login failed.');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-zinc-900 border border-zinc-800 rounded-xl p-8 shadow-2xl">
+    <div className="min-h-screen bg-black flex items-center justify-center p-6">
+      <div className="w-full max-w-sm">
         
-        <div className="text-center mb-8">
-          <div className="flex justify-center mb-4">
-            <FaUniversity className="text-4xl text-indigo-500" />
+        {/* Header */}
+        <div className="text-center mb-10">
+          <div className="inline-block p-4 bg-zinc-900 rounded-3xl mb-4 shadow-2xl shadow-indigo-900/10">
+            <FaUniversity className="text-3xl text-indigo-500" />
           </div>
-          <h2 className="text-3xl font-bold text-white">Admin Access</h2>
-          <p className="text-zinc-400 mt-2">Enter your credentials to manage your club.</p>
+          <h2 className="text-3xl font-extrabold text-white tracking-tight">Welcome Back</h2>
+          <p className="text-zinc-500 mt-2 text-sm">Admin access for club managers</p>
         </div>
 
         {error && (
-          <div className="bg-red-500/10 border border-red-500/50 text-red-500 p-3 rounded-lg mb-6 text-center text-sm font-bold">
+          <div className="bg-red-500/10 text-red-400 p-4 rounded-2xl mb-6 text-center text-sm font-bold border border-red-500/20">
             {error}
           </div>
         )}
 
-        <form onSubmit={onSubmit} className="space-y-6">
+        <form onSubmit={onSubmit} className="space-y-4">
+          {/* 🌟 SOFT INPUTS */}
           <div>
-            <label className="block text-xs font-bold text-zinc-500 uppercase mb-2">Email Address</label>
             <input
               type="email"
               name="email"
               value={email}
               onChange={handleChange}
               required
-              className="w-full bg-zinc-950 border border-zinc-800 text-white rounded-lg px-4 py-3 focus:outline-none focus:border-indigo-500 transition-colors"
-              placeholder="name@college.edu"
+              className="w-full bg-zinc-900 text-white rounded-2xl px-5 py-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all placeholder:text-zinc-600"
+              placeholder="Email Address"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-zinc-500 uppercase mb-2">Password</label>
             <input
               type="password"
               name="password"
               value={password}
               onChange={handleChange}
               required
-              className="w-full bg-zinc-950 border border-zinc-800 text-white rounded-lg px-4 py-3 focus:outline-none focus:border-indigo-500 transition-colors"
-              placeholder="••••••••"
+              className="w-full bg-zinc-900 text-white rounded-2xl px-5 py-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all placeholder:text-zinc-600"
+              placeholder="Password"
             />
           </div>
 
+          {/* 🌟 BIG BUTTON */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-white text-black font-bold text-lg py-4 rounded-2xl hover:bg-zinc-200 transition-transform active:scale-95 shadow-lg shadow-white/5 flex items-center justify-center gap-2 mt-4"
           >
-            {loading ? 'Signing In...' : 'Sign In'}
+            {loading ? 'Signing In...' : <>Sign In <FaArrowRight size={14} /></>}
           </button>
         </form>
 
-        <p className="mt-6 text-center text-zinc-500 text-sm">
-          Not an admin? <Link to="/" className="text-indigo-400 hover:underline">Return Home</Link>
+        <p className="mt-8 text-center text-zinc-600 text-xs">
+          Only authorized club leads can log in. <br/>
+          <Link to="/" className="text-indigo-500 hover:underline">Return to Directory</Link>
         </p>
       </div>
     </div>

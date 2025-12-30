@@ -30,7 +30,7 @@ const ClubsDirectory = () => {
   );
 
   return (
-    <div className="min-h-screen bg-zinc-950 pt-24 px-4 pb-20">
+    <div className="min-h-screen bg-zinc-950 pt-14 md:pt-24 px-4 pb-24 md:pb-20">
       <div className="max-w-7xl mx-auto">
         
         {/* Header & Search */}

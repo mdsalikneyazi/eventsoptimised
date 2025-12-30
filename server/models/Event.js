@@ -21,6 +21,11 @@ const EventSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  // 👇 NEW FIELD
+  registrationLink: {
+    type: String, 
+    default: '' // Optional, in case they don't have a form
+  },
   createdAt: {
     type: Date,
     default: Date.now

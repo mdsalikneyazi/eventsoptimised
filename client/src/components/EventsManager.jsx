@@ -9,6 +9,7 @@ const EventsManager = () => {
     description: '',
     date: '',
     location: '',
+    registrationLink: '', // 👈 Add this
   });
   const [msg, setMsg] = useState('');
 
@@ -38,7 +39,7 @@ const EventsManager = () => {
         headers: { 'x-auth-token': token }
       });
       setMsg('✅ Event Scheduled!');
-      setFormData({ title: '', description: '', date: '', location: '' });
+      setFormData({ title: '', description: '', date: '', location: '', registrationLink: '' });
       fetchEvents(); 
       setTimeout(() => setMsg(''), 3000);
     } catch (err) {
@@ -85,6 +86,23 @@ const EventsManager = () => {
 
           <textarea required placeholder="Event Details..." rows="3" className="w-full bg-zinc-900 border border-zinc-700 rounded-lg p-3 text-white focus:border-indigo-500 outline-none resize-none" 
             value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} />
+
+          <div>
+            <label className="block text-xs font-bold text-zinc-500 uppercase mb-2">
+              Registration Link (Optional)
+            </label>
+            <input
+              type="url"
+              name="registrationLink"
+              placeholder="https://forms.google.com/..."
+              value={formData.registrationLink}
+              onChange={(e) => setFormData({ ...formData, registrationLink: e.target.value })}
+              className="w-full bg-zinc-900 border border-zinc-700 rounded-lg p-3 text-white focus:border-indigo-500 outline-none"
+            />
+            <p className="text-xs text-zinc-600 mt-1">
+              Paste your Google Form or Luma link here. Leave empty if no registration needed.
+            </p>
+          </div>
 
           <button className="w-full bg-white text-black font-bold py-3 rounded-lg hover:bg-zinc-200 transition-colors">
             Publish Event

@@ -37,8 +37,8 @@ const ApplicationModal = ({ clubId, clubName, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-zinc-900 border border-zinc-800 rounded-xl w-full max-w-md p-6 relative animate-fadeIn">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
+      <div className="bg-zinc-900 border border-zinc-800 rounded-3xl w-11/12 max-w-md p-6 relative shadow-2xl mx-auto">
         <button onClick={onClose} className="absolute top-4 right-4 text-zinc-500 hover:text-white">
           <FaTimes size={20} />
         </button>
@@ -58,16 +58,16 @@ const ApplicationModal = ({ clubId, clubName, onClose }) => {
                </div>
             )}
 
-            <input required placeholder="Full Name" className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-white focus:border-indigo-500 outline-none"
+            <input required placeholder="Full Name" className="w-full bg-zinc-950 border-none rounded-2xl p-4 text-white placeholder-zinc-600 focus:ring-2 focus:ring-indigo-500/50 outline-none transition-all"
               value={formData.studentName} onChange={e => setFormData({...formData, studentName: e.target.value})} />
             
-            <input required type="email" placeholder="College Email" className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-white focus:border-indigo-500 outline-none"
+            <input required type="email" placeholder="College Email" className="w-full bg-zinc-950 border-none rounded-2xl p-4 text-white placeholder-zinc-600 focus:ring-2 focus:ring-indigo-500/50 outline-none transition-all"
               value={formData.studentEmail} onChange={e => setFormData({...formData, studentEmail: e.target.value})} />
             
-            <input required placeholder="Roll Number" className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-white focus:border-indigo-500 outline-none"
+            <input required placeholder="Roll Number" className="w-full bg-zinc-950 border-none rounded-2xl p-4 text-white placeholder-zinc-600 focus:ring-2 focus:ring-indigo-500/50 outline-none transition-all"
               value={formData.rollNumber} onChange={e => setFormData({...formData, rollNumber: e.target.value})} />
             
-            <textarea required placeholder="Why do you want to join?" rows="3" className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-white focus:border-indigo-500 outline-none resize-none"
+            <textarea required placeholder="Why do you want to join?" rows="3" className="w-full bg-zinc-950 border-none rounded-2xl p-4 text-white placeholder-zinc-600 focus:ring-2 focus:ring-indigo-500/50 outline-none resize-none transition-all"
               value={formData.reason} onChange={e => setFormData({...formData, reason: e.target.value})} />
 
             {/* 👇 5. Add the ReCAPTCHA Component Here */}

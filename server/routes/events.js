@@ -22,14 +22,16 @@ router.get('/', async (req, res) => {
 // @desc    Create a new event
 router.post('/create', auth, async (req, res) => {
   try {
-    const { title, description, date, location } = req.body;
+    // 👇 Extract registrationLink from body
+    const { title, description, date, location, registrationLink } = req.body;
 
     const newEvent = new Event({
       user: req.user.id, // Correctly saves logged-in User ID
       title,
       description,
       date,
-      location
+      location,
+      registrationLink // 👇 Save it to DB
     });
 
     const event = await newEvent.save();

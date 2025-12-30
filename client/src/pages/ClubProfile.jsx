@@ -35,7 +35,7 @@ const ClubProfile = () => {
   if (!club) return <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center">Club Not Found</div>;
 
   return (
-    <div className="min-h-screen bg-zinc-950 pt-24 pb-20">
+    <div className="min-h-screen bg-zinc-950 pt-14 md:pt-24 pb-24 md:pb-20">
       
       {/* 1. HERO SECTION (With Banner) */}
       <div 
