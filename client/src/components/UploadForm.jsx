@@ -32,7 +32,7 @@ const UploadForm = ({ onUploadSuccess }) => {
       console.log("🚀 SENDING Upload Request...");
 
       // 2. The Request (Using the URL that worked in your Ping Test)
-      const res = await axios.post('http://localhost:5000/api/posts/create', formData, {
+      const res = await axios.post('/api/posts/create', formData, {
         headers: {
           'x-auth-token': token
           // IMPORTANT: Do NOT manually set Content-Type. Axios does it automatically.

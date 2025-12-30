@@ -12,7 +12,7 @@ const ApplicationsList = () => {
       // We need to create this route first or assume it exists. 
       // Based on the prompt, the user didn't ask for a GET route, but we need one.
       // I'll create a simple GET route in the backend as part of this step proactively.
-      const res = await axios.get('http://localhost:5000/api/applications/my-applications', {
+      const res = await axios.get('/api/applications/my-applications', {
         headers: { 'x-auth-token': token }
       });
       setApplications(res.data);
@@ -30,7 +30,7 @@ const ApplicationsList = () => {
   const handleStatusUpdate = async (id, status) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:5000/api/applications/${id}/status`, 
+      await axios.put(`/api/applications/${id}/status`, 
         { status }, 
         { headers: { 'x-auth-token': token } }
       );

@@ -11,7 +11,7 @@ const ClubsDirectory = () => {
   useEffect(() => {
     const fetchClubs = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/auth/clubs');
+        const res = await axios.get('/api/auth/clubs');
         setClubs(res.data);
       } catch (err) {
         console.error("Failed to fetch clubs");

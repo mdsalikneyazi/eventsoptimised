@@ -10,7 +10,7 @@ const ModerationFeed = () => {
   // Fetch ALL posts (using the public feed endpoint)
   const fetchPosts = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/posts/feed');
+      const res = await axios.get('/api/posts/feed');
       setPosts(res.data);
       setLoading(false);
     } catch (err) {
@@ -28,7 +28,7 @@ const ModerationFeed = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/posts/${postId}`, {
+      await axios.delete(`/api/posts/${postId}`, {
         headers: { 'x-auth-token': token }
       });
       

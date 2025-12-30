@@ -22,7 +22,7 @@ const CreateClubForm = () => {
   const fetchClubs = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/auth/all-clubs', {
+      const res = await axios.get('/api/auth/all-clubs', {
         headers: { 'x-auth-token': token }
       });
       setClubs(res.data);
@@ -36,7 +36,7 @@ const CreateClubForm = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/auth/register-club', formData, {
+      await axios.post('/api/auth/register-club', formData, {
         headers: { 'x-auth-token': token }
       });
       setMsg('✅ Club Created Successfully!');
@@ -54,7 +54,7 @@ const CreateClubForm = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/auth/user/${id}`, {
+      await axios.delete(`/api/auth/user/${id}`, {
         headers: { 'x-auth-token': token }
       });
       setClubs(clubs.filter(club => club._id !== id)); // Remove from UI

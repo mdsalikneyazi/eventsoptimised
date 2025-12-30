@@ -21,7 +21,7 @@ const EventsManager = () => {
   const fetchEvents = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/events/my-events', {
+      const res = await axios.get('/api/events/my-events', {
         headers: { 'x-auth-token': token }
       });
       setEvents(res.data);
@@ -35,7 +35,7 @@ const EventsManager = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/events/create', formData, {
+      await axios.post('/api/events/create', formData, {
         headers: { 'x-auth-token': token }
       });
       setMsg('✅ Event Scheduled!');
@@ -52,7 +52,7 @@ const EventsManager = () => {
     if (!window.confirm("Cancel this event?")) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/events/${id}`, {
+      await axios.delete(`/api/events/${id}`, {
         headers: { 'x-auth-token': token }
       });
       setEvents(events.filter(ev => ev._id !== id));

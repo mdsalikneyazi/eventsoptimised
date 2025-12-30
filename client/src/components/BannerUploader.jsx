@@ -16,8 +16,8 @@ const BannerUploader = ({ currentBanner, onUpdate }) => {
     try {
       const token = localStorage.getItem('token');
       // Use existing API URL convention if possible, but hardcoding for now as per instructions
-      // Ideally should be `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/update-banner`
-      const res = await axios.put('http://localhost:5000/api/auth/update-banner', formData, {
+      // Ideally should be `${import.meta.env.VITE_API_URL || ''}/api/auth/update-banner`
+      const res = await axios.put('/api/auth/update-banner', formData, {
         headers: { 'x-auth-token': token }
       });
       onUpdate(res.data.bannerUrl);

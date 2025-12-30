@@ -21,7 +21,7 @@ const ApplicationModal = ({ clubId, clubName, onClose }) => {
     setLoading(true);
     try {
       // 4. Send captchaToken to backend
-      await axios.post('http://localhost:5000/api/applications/apply', { 
+      await axios.post('/api/applications/apply', { 
         ...formData, 
         clubId,
         captchaToken 

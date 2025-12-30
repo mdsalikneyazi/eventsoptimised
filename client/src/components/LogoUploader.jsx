@@ -15,7 +15,7 @@ const LogoUploader = ({ currentLogo, onUpdate, clubName }) => {
 
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.put('http://localhost:5000/api/auth/update-logo', formData, {
+      const res = await axios.put('/api/auth/update-logo', formData, {
         headers: { 'x-auth-token': token }
       });
       

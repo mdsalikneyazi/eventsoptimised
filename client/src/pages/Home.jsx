@@ -15,8 +15,8 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const [clubsRes, postsRes] = await Promise.all([
-          axios.get('http://localhost:5000/api/auth/clubs'),
-          axios.get('http://localhost:5000/api/posts/feed')
+          axios.get('/api/auth/clubs'),
+          axios.get('/api/posts/feed')
         ]);
 
         setClubs(clubsRes.data);

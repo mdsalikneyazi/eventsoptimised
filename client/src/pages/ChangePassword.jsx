@@ -37,7 +37,7 @@ const ChangePassword = () => {
 
       // Call the backend route we just created
       await axios.put(
-        'http://localhost:5000/api/auth/change-initial-password',
+        '/api/auth/change-initial-password',
         { newPassword },
         config
       );

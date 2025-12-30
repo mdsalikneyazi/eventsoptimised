@@ -45,7 +45,7 @@ const ClubSettingsForm = ({ currentUser, onUpdate }) => {
     setMsg('');
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.put('http://localhost:5000/api/auth/update-profile', formData, {
+      const res = await axios.put('/api/auth/update-profile', formData, {
         headers: { 'x-auth-token': token }
       });
       setMsg('✅ Profile Updated Successfully!');

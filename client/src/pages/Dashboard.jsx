@@ -33,12 +33,12 @@ const Dashboard = () => {
 
     const fetchData = async () => {
       try {
-        const postsRes = await axios.get('http://localhost:5000/api/posts/my-posts', {
+        const postsRes = await axios.get('/api/posts/my-posts', {
           headers: { 'x-auth-token': token }
         });
         setMyPosts(postsRes.data);
 
-        const userRes = await axios.get('http://localhost:5000/api/auth', {
+        const userRes = await axios.get('/api/auth', {
           headers: { 'x-auth-token': token }
         });
         setCurrentUser(userRes.data);
@@ -59,7 +59,7 @@ const Dashboard = () => {
     if(!window.confirm("Are you sure you want to delete this post?")) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/posts/${postId}`, {
+      await axios.delete(`/api/posts/${postId}`, {
         headers: { 'x-auth-token': token }
       });
       setMyPosts(myPosts.filter(post => post._id !== postId));

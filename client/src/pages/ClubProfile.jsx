@@ -16,11 +16,11 @@ const ClubProfile = () => {
     const fetchData = async () => {
       try {
         // 1. Get Club Details
-        const clubRes = await axios.get(`http://localhost:5000/api/auth/club/${id}`);
+        const clubRes = await axios.get(`/api/auth/club/${id}`);
         setClub(clubRes.data);
 
         // 2. Get Club Posts
-        const postsRes = await axios.get(`http://localhost:5000/api/posts/club/${id}`);
+        const postsRes = await axios.get(`/api/posts/club/${id}`);
         setPosts(postsRes.data);
       } catch (err) {
         console.error("Error fetching data", err);
