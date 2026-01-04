@@ -45,7 +45,7 @@ function App() {
 
             {/* Name with Gradient & Hover Float Effect */}
             <a 
-              href="https://www.instagram.com/sakshm.05/" // Change this to your link!
+              href="https://www.instagram.com/me_sakshu.k/" // Change this to your link!
               target="_blank" 
               rel="noopener noreferrer"
               className="group relative px-6 py-2 rounded-full bg-zinc-900/50 border border-white/5 hover:border-indigo-500/30 transition-all duration-300 hover:shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:-translate-y-1"

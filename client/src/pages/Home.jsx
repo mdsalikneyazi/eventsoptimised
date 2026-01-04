@@ -152,8 +152,8 @@ const Home = () => {
               <Link to={`/clubs/${club._id}`} key={club._id} className="group block">
                 <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-2xl overflow-hidden hover:border-indigo-500/50 hover:bg-zinc-900 transition-all active:scale-95 duration-200 shadow-lg hover:shadow-indigo-500/10">
                   
-                  {/* Banner Area */}
-                  <div className="h-36 bg-zinc-800 relative overflow-hidden">
+                  {/* Banner Area - removed overflow-hidden so the logo can float out */}
+                  <div className="h-36 bg-zinc-800 relative">
                     {club.bannerUrl ? (
                       <img src={club.bannerUrl} alt="" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
                     ) : (
