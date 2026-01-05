@@ -1,33 +1,38 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import ClubsDirectory from './pages/ClubsDirectory';
-import ClubProfile from './pages/ClubProfile';
-import Events from './pages/Events';
-import ChangePassword from './pages/ChangePassword';
+
+const Home = lazy(() => import('./pages/Home'));
+const Login = lazy(() => import('./pages/Login'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const ClubsDirectory = lazy(() => import('./pages/ClubsDirectory'));
+const ClubProfile = lazy(() => import('./pages/ClubProfile'));
+const Events = lazy(() => import('./pages/Events'));
+const ChangePassword = lazy(() => import('./pages/ChangePassword'));
 
 function App() {
   return (
     <Router>
       <div className="min-h-screen bg-zinc-950 text-zinc-200 selection:bg-indigo-500 selection:text-white flex flex-col">
         <Navbar />
-        
-        {/* Main Content Area - Grows to push footer down */}
+
         <div className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/clubs" element={<ClubsDirectory />} />
-            <Route path="/clubs/:id" element={<ClubProfile />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/change-password" element={<ChangePassword />} />
-          </Routes>
+          <Suspense fallback={null}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/clubs" element={<ClubsDirectory />} />
+              <Route path="/clubs/:id" element={<ClubProfile />} />
+              <Route path="/events" element={<Events />} />
+              <Route path="/change-password" element={<ChangePassword />} />
+            </Routes>
+          </Suspense>
         </div>
 
+        {/* Footer — untouched */}
         {/* 🌟 ANIMATED FOOTER START 🌟 */}
+         {/* 🌟 ANIMATED FOOTER START 🌟 */}
         <footer className="relative mt-20 border-t border-white/5 bg-black/20 backdrop-blur-md">
           {/* Glowing Top Line */}
           <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent"></div>
@@ -64,7 +69,7 @@ function App() {
           </div>
         </footer>
         {/* 🌟 ANIMATED FOOTER END 🌟 */}
-
+        {/* YOUR EXISTING FOOTER CODE HERE */}
       </div>
     </Router>
   );
