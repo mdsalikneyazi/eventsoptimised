@@ -52,14 +52,26 @@ const ClubsDirectory = () => {
           </div>
         </div>
 
-        {/* Grid */}
+        {/* Horizontal Scroll Container on Mobile / Grid on Desktop */}
         {loading ? (
           <div className="text-white text-center">Loading Directory...</div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredClubs.map(club => (
-              <ClubCard key={club._id} club={club} />
-            ))}
+          <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {/* Mobile Horizontal Scroll */}
+            <div className="flex md:hidden gap-4 overflow-x-auto snap-x snap-mandatory py-2">
+              {filteredClubs.map(club => (
+                <div className="snap-start flex-shrink-0 w-64">
+                  <ClubCard club={club} />
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop Grid */}
+            <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filteredClubs.map(club => (
+                <ClubCard key={club._id} club={club} />
+              ))}
+            </div>
           </div>
         )}
 
@@ -75,4 +87,3 @@ const ClubsDirectory = () => {
 };
 
 export default ClubsDirectory;
-
